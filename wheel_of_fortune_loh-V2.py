@@ -69,6 +69,7 @@ def cvw():
                         round_winner(p)
                         is_guessed = True
                 elif guess.isalpha() == True and guess in consonant_list and guess not in letter_list and len(guess) == 1: # guess is an incorrect letter
+                    consonant_list.remove(guess) # remove guess from list to prevent reuse
                     print(''.join(onscreen))
                     print(f'{guess} is not in the word. Your turn is over.\n')
                     break
@@ -344,7 +345,12 @@ while game_is_played == True:
                         print(f'{guess} appears {correct_letter_count} times. You win ${winnings}.')
                         add_winnings(p) # add winnings to Player balance
                         cvw()
-                        break
+                        if p == 1:
+                            p = 2
+                        elif p == 2:
+                            p = 3
+                        else:
+                            p = 1
                     elif guess.isalpha() == True and guess in consonant_list and guess not in letter_list and len(guess) == 1: # guess is an incorrect letter
                         consonant_list.remove(guess) # remove guess from list to prevent reuse
                         print(''.join(onscreen))
